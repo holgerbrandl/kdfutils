@@ -1,0 +1,123 @@
+
+plugins {
+    id "org.jetbrains.kotlin.jvm" version "1.7.10"
+    id "java"
+    id "maven-publish"
+    id "signing"
+    id "io.github.gradle-nexus.publish-plugin" version "1.1.0"
+//    id "org.jetbrains.kotlin.jupyter.api" version "0.11.0-87"
+}
+
+repositories {
+    mavenCentral()
+//    mavenLocal()
+}
+
+
+dependencies {
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.7.10'
+//    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.7.10'
+//    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
+
+    // needed to work around https://youtrack.jetbrains.com/issue/KT-15064
+//    compileOnly 'org.jetbrains.kotlin:kotlin-script-runtime:1.7.10'
+
+    api( 'org.jetbrains.kotlinx:dataframe-core:0.8.1')
+
+    implementation('com.github.holgerbrandl:krangl:0.18.4')
+//            { // to force 1.6 (empty header regression)
+//        exclude group: 'org.apache.commons', module: 'commons-csv'
+//    }
+
+
+//    api 'org.apache.poi:poi-ooxml:5.2.2'
+
+    compileOnly 'org.jetbrains.lets-plot:lets-plot-kotlin-jvm:4.0.0'
+
+
+    testImplementation group: 'junit', name: 'junit', version: '4.13.1'
+    testImplementation 'io.kotest:kotest-assertions-core:5.4.2'
+//    testImplementation 'com.h2database:h2:2.1.214'
+//    testImplementation 'org.jetbrains.kotlin:kotlin-script-runtime:1.7.10'
+}
+
+
+// disabled because would require to inherit StringSpec in all test classes
+//test {
+//    useJUnitPlatform()
+//}
+
+
+test {
+    // Tests would fail with default memory settings
+    // See https://stackoverflow.com/questions/20490105/gradleworkermain-outofmemoryerror
+    maxHeapSize = "2048m"
+}
+
+
+//http://stackoverflow.com/questions/34377367/why-is-gradle-install-replacing-my-version-with-unspecified
+group 'com.github.holgerbrandl'
+//version '0.16.95'
+//version '1.0'
+version '1.0-SNAPSHOT'
+
+//processJupyterApiResources {
+//    libraryProducers = ["krangl.integration.Integration"]
+//}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from(components.java)
+
+            pom {
+                name = 'krangl'
+                description = 'Misc utilities for kotlin-dataframe'
+                url = 'https://github.com/holgerbrandl/kdfutils'
+                licenses {
+                    license {
+                        name = 'MIT'
+                        url = 'https://github.com/holgerbrandl/kdfutils/blob/master/LICENSE.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'holgerbrandl'
+                        name = 'Holger Brandl'
+                        email = 'holgerbrandl@gmail.com'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:github.com/holgerbrandl/kdfutils.git'
+                    developerConnection = 'scm:git:ssh://github.com/holgerbrandl/kdfutils.git'
+                    url = 'https://github.com/holgerbrandl/kdfutils.git'
+                }
+            }
+        }
+    }
+}
+
+
+nexusPublishing {
+    repositories {
+        sonatype {
+            // we need to provide a fallback here since all dev but one won't have those credentials
+            // https://stackoverflow.com/questions/43333990/how-to-assign-default-values-for-ext-based-properties-in-gradle
+            // https://discuss.gradle.org/t/getproperty-vs-findproperty/21822
+            snapshotRepositoryUrl = uri(project.findProperty("sonatypeStagingProfileId") ?: 'not_defined')
+            username = project.findProperty("ossrhUsername")  ?: 'not_defined'
+            password = project.findProperty("ossrhPassword") ?: 'not_defined'
+        }
+    }
+}
+
+signing {
+    sign publishing.publications.mavenJava
+}

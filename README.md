@@ -1,7 +1,7 @@
 # kdfutils
 
 
-[ ![Download](https://img.shields.io/badge/Maven%20Central-0.18.4-orange) ](https://mvnrepository.com/artifact/com.github.holgerbrandl/kdutils)  [![Build Status](https://github.com/holgerbrandl/kdutils/workflows/build/badge.svg)](https://github.com/holgerbrandl/kdutils/actions?query=workflow%3Abuild) [![Gitter](https://badges.gitter.im/holgerbrandl/kdutils.svg)](https://gitter.im/holgerbrandl/kdutils?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[ ![Download](https://img.shields.io/badge/Maven%20Central-1.0-orange) ](https://mvnrepository.com/artifact/com.github.holgerbrandl/kdutils)  [![Build Status](https://github.com/holgerbrandl/kdutils/workflows/build/badge.svg)](https://github.com/holgerbrandl/kdutils/actions?query=workflow%3Abuild) [![Gitter](https://badges.gitter.im/holgerbrandl/kdutils.svg)](https://gitter.im/holgerbrandl/kdutils?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 
 
@@ -38,4 +38,3 @@ personsDF.unfold<City>("address", properties= listOf(City::name))
 ## Under the Hood
 
 `kdfutils` is using bidirectional conversion from/to `krangl` to enable certain features for `kdf` (kotlin-dataframe). The idea is to replace them with direct implementations over time and potentially propose backports (via PR) them into the kdf repo.
-

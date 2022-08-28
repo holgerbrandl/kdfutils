@@ -38,3 +38,15 @@ personsDF.unfold<City>("address", properties= listOf(City::name))
 ## Under the Hood
 
 `kdfutils` is using bidirectional conversion from/to `krangl` to enable certain features for `kdf` (kotlin-dataframe). The idea is to replace them with direct implementations over time and potentially propose backports (via PR) them into the kdf repo.
+
+
+## Gradle
+
+To get started simply add it as a dependency:
+```
+dependencies {
+    implementation "com.github.holgerbrandl:kdfutils:1.0"
+}
+```
+
+Builds are hosted on [maven-central](https://search.maven.org/search?q=a:kalasim) supported by the great folks at [sonatype](https://www.sonatype.com/).

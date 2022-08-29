@@ -35,6 +35,15 @@ personsDF.unfold<City>("address")
 personsDF.unfold<City>("address", properties= listOf(City::name)) 
 ```
 
+3. Example datasets
+```kotlin
+import org.jetbrains.kotlinx.dataframe.datasets
+
+irisData.head()
+
+sleepData.count()
+```
+
 ## Under the Hood
 
 `kdfutils` is using bidirectional conversion from/to `krangl` to enable certain features for `kdf` (kotlin-dataframe). The idea is to replace them with direct implementations over time and potentially propose backports (via PR) them into the kdf repo.

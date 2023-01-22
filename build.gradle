@@ -1,6 +1,6 @@
 
 plugins {
-    id "org.jetbrains.kotlin.jvm" version "1.7.10"
+    id "org.jetbrains.kotlin.jvm" version "1.8.0"
     id "java"
     id "maven-publish"
     id "signing"
@@ -15,14 +15,14 @@ repositories {
 
 
 dependencies {
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.7.10'
-//    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.7.10'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.8.0'
+//    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.8.0'
 //    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
     // needed to work around https://youtrack.jetbrains.com/issue/KT-15064
-//    compileOnly 'org.jetbrains.kotlin:kotlin-script-runtime:1.7.10'
+//    compileOnly 'org.jetbrains.kotlin:kotlin-script-runtime:1.8.0'
 
-    api( 'org.jetbrains.kotlinx:dataframe-core:0.8.1')
+    api( 'org.jetbrains.kotlinx:dataframe-core:0.9.1')
 
     implementation('com.github.holgerbrandl:krangl:0.18.4')
 //            { // to force 1.6 (empty header regression)
@@ -38,7 +38,7 @@ dependencies {
     testImplementation group: 'junit', name: 'junit', version: '4.13.1'
     testImplementation 'io.kotest:kotest-assertions-core:5.4.2'
 //    testImplementation 'com.h2database:h2:2.1.214'
-//    testImplementation 'org.jetbrains.kotlin:kotlin-script-runtime:1.7.10'
+//    testImplementation 'org.jetbrains.kotlin:kotlin-script-runtime:1.8.0'
 }
 
 
@@ -59,7 +59,7 @@ test {
 group 'com.github.holgerbrandl'
 //version '0.16.95'
 //version '1.0'
-version '1.0'
+version '1.1'
 
 //processJupyterApiResources {
 //    libraryProducers = ["krangl.integration.Integration"]

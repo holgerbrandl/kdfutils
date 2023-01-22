@@ -1,10 +1,12 @@
-package org.jetbrains.kotlinx.dataframe.api
+package com.github.holgerbrandl.kdfutils
 
 import krangl.*
 import org.jetbrains.kotlinx.dataframe.AnyFrame
+import org.jetbrains.kotlinx.dataframe.api.columnOf
+import org.jetbrains.kotlinx.dataframe.api.named
 
 
-fun DataFrame.asKotlinDF(): AnyFrame {
+fun DataFrame.toKotlinDF(): AnyFrame {
     val kdfCols = cols.map {
         when(it) {
             is DoubleCol -> columnOf(*it.values)
@@ -18,6 +20,6 @@ fun DataFrame.asKotlinDF(): AnyFrame {
             }
         }.named(it.name)
     }
-    val df = dataFrameOf(kdfCols)
+    val df = org.jetbrains.kotlinx.dataframe.api.dataFrameOf(kdfCols)
     return df
 }

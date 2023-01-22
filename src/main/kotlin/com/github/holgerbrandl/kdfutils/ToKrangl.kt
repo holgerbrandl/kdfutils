@@ -1,11 +1,11 @@
-package org.jetbrains.kotlinx.dataframe.api
+package com.github.holgerbrandl.kdfutils
 
 import krangl.AnyCol
 import org.jetbrains.kotlinx.dataframe.values
 import kotlin.reflect.typeOf
 
 
-fun <E> org.jetbrains.kotlinx.dataframe.DataFrame<E>.asKranglDF(): krangl.DataFrame {
+fun <E> org.jetbrains.kotlinx.dataframe.DataFrame<E>.toKranglDF(): krangl.DataFrame {
     val kdfCols = columns().map {
         when {
             it.type() == typeOf<Double>() -> krangl.DoubleCol(it.name(), it.values() as List<Double?>)

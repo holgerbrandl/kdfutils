@@ -1,3 +1,6 @@
+import com.github.holgerbrandl.kdfutils.toKotlinDF
+import com.github.holgerbrandl.kdfutils.toKranglDF
+import com.github.holgerbrandl.kdfutils.unfold
 import io.kotest.matchers.shouldBe
 import krangl.irisData
 import org.jetbrains.kotlinx.dataframe.DataFrame
@@ -12,8 +15,8 @@ class ConversionTest {
 
     @Test
     fun `it should bidirectionally convert data-frame`() {
-        val kotlinDF = irisData.asKotlinDF()
-        val kranglDF = kotlinDF.asKranglDF()
+        val kotlinDF = irisData.toKotlinDF()
+        val kranglDF = kotlinDF.toKranglDF()
 
         kranglDF shouldBe irisData
     }
@@ -27,9 +30,9 @@ class ConversionTest {
             Person("Tina", 40, 60.4)
         )
 
-        val df = users.asDataFrame()
+        val df = users.toDataFrame()
 
-        df.names shouldBe listOf("age", "name", "weight")
+        df.names shouldBe listOf("name", "age", "weight")
         df["age"][0] shouldBe 23
     }
 }
@@ -43,6 +46,7 @@ class UnfoldTests {
             "admin", UUID.randomUUID()
         )
 
+        // todo still blocked via https://github.com/Kotlin/dataframe/issues/159
         val unwrapped = users.unfold<UUID>("ids", properties = listOf("variant"), keep = true)
 
         unwrapped["variant"][1] shouldBe 2

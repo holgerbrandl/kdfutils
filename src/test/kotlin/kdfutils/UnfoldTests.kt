@@ -38,13 +38,14 @@ class UnfoldTests {
         val dfUnfold = personsDF.unfold(
             "address",
             keep = true,
-            properties = listOf("name"),
+            addPrefix = true
+//            properties = listOf("name", "bundesLand"),
         )
 
         dfUnfold.print()
 
         dfUnfold.apply {
-            columnNames() shouldBe listOf("name", "address", "address_name")
+            columnNames() shouldBe listOf("name", "address", "address_name", "address_code")
         }
     }
 

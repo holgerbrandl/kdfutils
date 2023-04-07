@@ -1,6 +1,6 @@
 
 plugins {
-    id "org.jetbrains.kotlin.jvm" version "1.8.0"
+    id "org.jetbrains.kotlin.jvm" version "1.8.10"
     id "java"
     id "maven-publish"
     id "signing"
@@ -10,12 +10,12 @@ plugins {
 
 repositories {
     mavenCentral()
-//    mavenLocal()
+    mavenLocal()
 }
 
 
 dependencies {
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.8.0'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:1.8.10'
 //    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.8.0'
 //    compile "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 
@@ -29,14 +29,14 @@ dependencies {
 //        exclude group: 'org.apache.commons', module: 'commons-csv'
 //    }
 
-
 //    api 'org.apache.poi:poi-ooxml:5.2.2'
 
     compileOnly 'org.jetbrains.lets-plot:lets-plot-kotlin-jvm:4.0.0'
 
-
     testImplementation group: 'junit', name: 'junit', version: '4.13.1'
     testImplementation 'io.kotest:kotest-assertions-core:5.4.2'
+    testImplementation 'com.github.holgerbrandl:kutils:1.0-SNAPSHOT'
+
 //    testImplementation 'com.h2database:h2:2.1.214'
 //    testImplementation 'org.jetbrains.kotlin:kotlin-script-runtime:1.8.0'
 }
@@ -59,7 +59,7 @@ test {
 group 'com.github.holgerbrandl'
 //version '0.16.95'
 //version '1.0'
-version '1.1'
+version '1.2-SNAPSHOT'
 
 //processJupyterApiResources {
 //    libraryProducers = ["krangl.integration.Integration"]

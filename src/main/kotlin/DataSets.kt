@@ -2,10 +2,11 @@
 
 package org.jetbrains.kotlinx.dataframe.datasets
 
-import krangl.DataFrame
-import krangl.readDelim
-import krangl.readTSV
-import org.apache.commons.csv.CSVFormat
+import org.jetbrains.kotlinx.dataframe.DataFrame
+import org.jetbrains.kotlinx.dataframe.api.map
+import org.jetbrains.kotlinx.dataframe.io.CSVType
+import org.jetbrains.kotlinx.dataframe.io.readDelim
+import org.jetbrains.kotlinx.dataframe.io.readTSV
 import java.io.File
 import java.net.URL
 
@@ -28,7 +29,10 @@ Additional variables order, conservation status and vore were added from wikiped
 - brainwt. brain weight in kilograms
 - bodywt. body weight in kilograms
  */
-val sleepData by lazy { DataFrame.readDelim(DataFrame::class.java.getResourceAsStream("data/msleep.csv")) }
+val sleepData by lazy {
+    val reader = DataFrame::class.java.getResourceAsStream("data/msleep.csv")
+    DataFrame.readDelim(reader!!, csvType = CSVType.DEFAULT)
+}
 
 
 /* Data class required to parse sleep Data records. */
@@ -47,7 +51,7 @@ data class SleepPattern(
 )
 
 val sleepPatterns by lazy {
-    sleepData.rows.map { row ->
+    sleepData.map { row ->
         SleepPattern(
             row["name"] as String,
             row["genus"] as String,
@@ -86,8 +90,8 @@ val sleepPatterns by lazy {
  */
 val irisData by lazy {
     DataFrame.readDelim(
-        DataFrame::class.java.getResourceAsStream("data/iris.txt"),
-        format = CSVFormat.TDF.withHeader()
+        SleepPattern::class.java.getResourceAsStream("/data/iris.txt")!!,
+        csvType = CSVType.DEFAULT
     )
 }
 

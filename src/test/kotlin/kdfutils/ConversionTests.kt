@@ -15,10 +15,10 @@ class ConversionTests {
 
     @Test
     fun `it should bidirectionally convert data-frame`() {
-        val kotlinDF = irisData.toKotlinDF()
+        val kotlinDF = irisData
         val kranglDF = kotlinDF.toKranglDF()
 
-        kranglDF shouldBe irisData
+        kranglDF.toKotlinDF() shouldBe irisData
     }
 
     @Test

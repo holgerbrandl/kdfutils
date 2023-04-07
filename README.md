@@ -10,7 +10,10 @@
 An opinionated set of utilities that we loved in [krangl](https://github.com/holgerbrandl/krangl) are yet/initially/bydesign missing in [kotlin-dataframe](https://github.com/Kotlin/dataframe)
 
 
-1. Example datasets 
+### Example datasets 
+
+KDF lacks example data to produce reproducible examples
+
 ```kotlin
 import org.jetbrains.kotlinx.dataframe.datasets
 
@@ -21,13 +24,16 @@ sleepData.count()
 flightsdata.columnNames()
 ```
 
-2. Bidirectional conversion between krangl and kotlin-dataframe
+### Bidirectional conversion between krangl and kotlin-dataframe
+
 ```kotlin
 irisData.toKotlinDF().toKranglDF()
 ```
 Note: `kdfutils` does not have a runtme dependency on krangl. It's up to the user to add it if bi-directional conversion is needed
 
-3. KDF support an API to unfold  object columns. However, as it still lacks some convenience, here we support of properties from object column with more control over the unfolding process (optionally keep original column, cherry which attributes to unfold, add prefix)
+### Extended unfold support
+
+KDF supports an API to unfold  object columns. However, as it still lacks some convenience, here we support of properties from object column with more control over the unfolding process (optionally keep original column, cherry which attributes to unfold, add prefix)
 ```kotlin
 data class City(val name:String, val code:Int)
 data class Person(val name:String, val address:City)
@@ -43,6 +49,21 @@ personsDF.unfold<City>("address")
 // or selectively via property reference
 personsDF.unfold<City>("address", properties= listOf(City::name), keep = true, addPrefix = true ) 
 ```
+
+### Naming Conventions & Conversions
+
+There are many ways to name columns. To ease the transition (between camel, snake, ..) and to create names complying with compiler conventions, this library provides some renaming utilities
+
+### Data Frame Schema
+
+While waiting for a fix of https://github.com/Kotlin/dataframe/issues/344 we can use kdfutils to 
+```
+df.printDataClassSchema("Record")
+// .. which will print a data class schema to stdout
+// data class Record(val foo:String?, val bar:Int?) 
+```
+Typically, this works best by first renaming columns to camel case
+
 
 ## Gradle
 

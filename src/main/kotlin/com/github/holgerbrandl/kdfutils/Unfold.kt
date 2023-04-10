@@ -2,19 +2,23 @@
 
 package org.jetbrains.kotlinx.dataframe.api.util
 
+import com.github.holgerbrandl.kdfutils.toKotlinDF
+import com.github.holgerbrandl.kdfutils.toKranglDF
+import krangl.unfold
 import krangl.util.detectPropertiesByReflection
 import org.jetbrains.kotlinx.dataframe.DataFrame
 import org.jetbrains.kotlinx.dataframe.api.*
+import kotlin.reflect.KCallable
 
 //
-//@JvmName("unfoldByProperty")
-//fun org.jetbrains.kotlinx.dataframe.DataFrame<*>.unfold2(
-//    columnName: String,
-//    properties: List<KCallable<*>>,
-//    keep: Boolean = true,
-//    addPrefix: Boolean = false,
-//) = toKranglDF().unfold(columnName, properties, keep, addPrefix)
-//    .toKotlinDF()
+@JvmName("unfoldByProperty")
+inline fun  <reified T> DataFrame<*>.unfoldByProperty(
+    columnName: String,
+    properties: List<KCallable<*>>,
+    keep: Boolean = true,
+    addPrefix: Boolean = false,
+) = toKranglDF().unfold(columnName, properties, keep, addPrefix)
+    .toKotlinDF()
 //
 //
 //inline fun <reified T> org.jetbrains.kotlinx.dataframe.DataFrame<*>.unfold2(
@@ -25,23 +29,23 @@ import org.jetbrains.kotlinx.dataframe.api.*
 //) = toKranglDF().unfold<T>(columnName, properties, keep, addPrefix)
 //    .toKotlinDF()
 
+//
+////// just kept for compatibility with krangl
+//inline fun <reified T> DataFrame<*>.unfoldByReflection(
+//    column: String,
+//    keep: Boolean = true,
+//    properties: List<String> = detectPropertiesByReflection<T>().map { it.name },
+//    addPrefix: Boolean = false,
+//): DataFrame<*> = this.unfold<T>(column, properties, keep, addPrefix)
 
-// just kept for compatibility with krangl
-inline fun <reified T> DataFrame<*>.unfoldByReflection(
+
+inline fun <reified T> DataFrame<*>.unfold(
     column: String,
-    keep: Boolean = true,
-    properties: List<String> = detectPropertiesByReflection<T>().map { it.name },
-    addPrefix: Boolean = false,
-): DataFrame<*> = this.unfold(column, properties, keep, addPrefix)
-
-
-fun DataFrame<*>.unfold(
-    column: String,
-    properties: List<String>? = null,
+    properties: List<String>? = detectPropertiesByReflection<T>().map { it.name },
     keep: Boolean = false,
     addPrefix: Boolean = false,
 ): DataFrame<*> {
-    val unfold = select(column)
+    val unfold = inferType().select(column)
         .unfold { cols { it.name() == column } }
         .flatten()
         .run {

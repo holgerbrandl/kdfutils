@@ -8,6 +8,7 @@ import krangl.unfold
 import krangl.util.detectPropertiesByReflection
 import org.jetbrains.kotlinx.dataframe.DataFrame
 import org.jetbrains.kotlinx.dataframe.api.*
+import org.jetbrains.kotlinx.dataframe.columns.toColumnSet
 import kotlin.reflect.KCallable
 
 //
@@ -50,7 +51,7 @@ inline fun <reified T> DataFrame<*>.unfold(
         .flatten()
         .run {
             if(properties != null) {
-                select(properties)
+                select { properties.toColumnSet() }
             } else this
         }
 

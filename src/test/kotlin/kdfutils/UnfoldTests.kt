@@ -19,7 +19,7 @@ class UnfoldTests {
 
     @Test
     fun `it should unwarp columns`() {
-        val dfUnfold = personsDF.unfold(
+        val dfUnfold = personsDF.unfold<City>(
             "address",
 //            keep = true,
             properties = listOf("name"),
@@ -35,7 +35,7 @@ class UnfoldTests {
 
     @Test
     fun `it should unwarp columns without prefix`() {
-        val dfUnfold = personsDF.unfold(
+        val dfUnfold = personsDF.unfold<City>(
             "address",
             keep = true,
             addPrefix = true
@@ -45,7 +45,7 @@ class UnfoldTests {
         dfUnfold.print()
 
         dfUnfold.apply {
-            columnNames() shouldBe listOf("name", "address", "address_name", "address_code")
+            columnNames() shouldBe listOf("name", "address", "address_code", "address_name")
         }
     }
 

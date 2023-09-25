@@ -7,13 +7,13 @@ import org.jetbrains.kotlinx.dataframe.api.rename
 
 //https://stackoverflow.com/questions/60010298/how-can-i-convert-a-camel-case-string-to-snake-case-and-back-in-idiomatic-kotlin
 
-//internal  fun String.camelToSnakeCase(): String {
-//    return "(?<=[a-zA-Z])[A-Z]".toRegex()
-//        .replace(this) {
-//            "_${it.value}"
-//        }
-//        .lowercase()
-//}
+internal  fun String.camelToSnakeCase(): String {
+    return "(?<=[a-zA-Z])[A-Z]".toRegex()
+        .replace(this) {
+            "_${it.value}"
+        }
+        .lowercase()
+}
 
 
 internal fun String.snakeToCamelCase(): String {
@@ -24,8 +24,10 @@ internal fun String.snakeToCamelCase(): String {
         }
 }
 
+fun String.toSnakeCase() = cleanNames().camelToSnakeCase()
+
 /** Implements a partial contract of https://rdrr.io/cran/janitor/man/clean_names.html */
-fun String.toSnakeCase(): String = replace("[#+=.,()/*: -]+".toRegex(), "_")
+fun String.cleanNames(): String = replace("[#+=.,()/*: -]+".toRegex(), "_")
     .replace("[", "")
     .replace("]", "")
     // remove leading and tailing underscores

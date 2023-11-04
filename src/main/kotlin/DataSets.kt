@@ -5,6 +5,7 @@ package org.jetbrains.kotlinx.dataframe.datasets
 import org.jetbrains.kotlinx.dataframe.DataFrame
 import org.jetbrains.kotlinx.dataframe.api.map
 import org.jetbrains.kotlinx.dataframe.io.CSVType
+import org.jetbrains.kotlinx.dataframe.io.readCSV
 import org.jetbrains.kotlinx.dataframe.io.readDelim
 import org.jetbrains.kotlinx.dataframe.io.readTSV
 import java.io.File
@@ -30,7 +31,7 @@ Additional variables order, conservation status and vore were added from wikiped
 - bodywt. body weight in kilograms
  */
 val sleepData by lazy {
-    val reader = DataFrame::class.java.getResourceAsStream("data/msleep.csv")
+    val reader = DataFrame::class.java.getResourceAsStream("/data/msleep.csv")
     DataFrame.readDelim(reader!!, csvType = CSVType.DEFAULT)
 }
 
@@ -89,9 +90,8 @@ val sleepPatterns by lazy {
  *
  */
 val irisData by lazy {
-    DataFrame.readDelim(
+    DataFrame.readTSV(
         SleepPattern::class.java.getResourceAsStream("/data/iris.txt")!!,
-        csvType = CSVType.DEFAULT
     )
 }
 

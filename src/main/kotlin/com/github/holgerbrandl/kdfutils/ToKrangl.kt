@@ -7,6 +7,7 @@ import kotlin.reflect.typeOf
 
 
 fun <E> org.jetbrains.kotlinx.dataframe.DataFrame<E>.toKranglDF(): krangl.DataFrame {
+    @Suppress("UNCHECKED_CAST")
     val kdfCols = inferType().columns().map {
         when {
             it.type() == typeOf<Double>() -> krangl.DoubleCol(it.name(), it.values() as List<Double?>)

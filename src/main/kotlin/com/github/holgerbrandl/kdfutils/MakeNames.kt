@@ -49,3 +49,14 @@ fun DataFrame<*>.renameToCamelCase() = renameToSnakeCase()
 fun DataFrame<*>.renameToKebapCase() = renameToSnakeCase()
     .rename { all() }
     .into { it.name.replace("_", "-") }
+
+
+fun DataFrame<*>.renameToSpaces() = renameToSnakeCase()
+    .rename { all() }
+    .into { it.name.snakeCaseToSpaces() }
+
+// via chat-gpt
+fun String.snakeCaseToSpaces(): String {
+    return split("_").joinToString(" ") { it.replaceFirstChar { char -> char.titlecase() } }
+}
+

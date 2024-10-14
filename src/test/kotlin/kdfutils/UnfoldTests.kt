@@ -4,7 +4,7 @@ import io.kotest.matchers.shouldBe
 import org.jetbrains.kotlinx.dataframe.api.print
 import org.jetbrains.kotlinx.dataframe.api.toDataFrame
 import org.jetbrains.kotlinx.dataframe.api.util.unfold
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class UnfoldTests {
     data class City(val name: String, val code: Int)
@@ -18,7 +18,7 @@ class UnfoldTests {
     val personsDF = persons.toDataFrame()
 
     @Test
-    fun `it should unwarp columns`() {
+    fun `it should unwrap columns`() {
         val dfUnfold = personsDF.unfold<City>(
             "address",
 //            keep = true,

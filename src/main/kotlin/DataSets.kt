@@ -3,12 +3,11 @@
 package org.jetbrains.kotlinx.dataframe.datasets
 
 import org.jetbrains.kotlinx.dataframe.DataFrame
+import org.jetbrains.kotlinx.dataframe.api.ParserOptions
 import org.jetbrains.kotlinx.dataframe.api.map
-import org.jetbrains.kotlinx.dataframe.io.CSVType
-import org.jetbrains.kotlinx.dataframe.io.readCSV
-import org.jetbrains.kotlinx.dataframe.io.readDelim
-import org.jetbrains.kotlinx.dataframe.io.readTSV
+import org.jetbrains.kotlinx.dataframe.io.*
 import java.io.File
+import java.io.FileInputStream
 import java.net.URL
 
 
@@ -32,7 +31,14 @@ Additional variables order, conservation status and vore were added from wikiped
  */
 val sleepData by lazy {
     val reader = DataFrame::class.java.getResourceAsStream("/data/msleep.csv")
-    DataFrame.readDelim(reader!!, csvType = CSVType.DEFAULT)
+
+    DataFrame.readDelim(
+//        reader!!,
+        FileInputStream(File("src/main/resources/data/msleep.csv")),
+        csvType = CSVType.DEFAULT,
+        colTypes = mapOf("brainwt" to ColType.Double),
+        parserOptions = ParserOptions(nullStrings = setOf("NA"))
+    )
 }
 
 
@@ -53,6 +59,7 @@ data class SleepPattern(
 
 val sleepPatterns by lazy {
     sleepData.map { row ->
+
         SleepPattern(
             row["name"] as String,
             row["genus"] as String,

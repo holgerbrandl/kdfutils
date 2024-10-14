@@ -6,7 +6,7 @@ import com.github.holgerbrandl.kdfutils.renameToSnakeCase
 import com.github.holgerbrandl.kdfutils.renameToSpaces
 import io.kotest.matchers.shouldBe
 import org.jetbrains.kotlinx.dataframe.api.dataFrameOf
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class RenameTests {
 

@@ -4,7 +4,7 @@ import com.github.holgerbrandl.kdfutils.printDataClassSchema
 import com.github.holgerbrandl.kdfutils.renameToCamelCase
 import kutils.captureOutput
 import org.jetbrains.kotlinx.dataframe.datasets.flightsData
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 class MiscTests {
 

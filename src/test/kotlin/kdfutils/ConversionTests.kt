@@ -1,25 +1,23 @@
 package kdfutils
 
-import com.github.holgerbrandl.kdfutils.toKotlinDF
-import com.github.holgerbrandl.kdfutils.toKranglDF
 import io.kotest.matchers.shouldBe
 import org.jetbrains.kotlinx.dataframe.DataFrame
 import org.jetbrains.kotlinx.dataframe.api.*
 import org.jetbrains.kotlinx.dataframe.datasets.irisData
-import org.junit.Test
+import org.junit.jupiter.api.Test
 
 private val <T> DataFrame<T>.names: Any
     get() = columnNames()
 
 class ConversionTests {
 
-    @Test
-    fun `it should bidirectionally convert data-frame`() {
-        val kotlinDF = irisData
-        val kranglDF = kotlinDF.toKranglDF()
-
-        kranglDF.toKotlinDF() shouldBe irisData
-    }
+//    @Test
+//    fun `it should bidirectionally convert data-frame`() {
+//        val kotlinDF = irisData
+//        val kranglDF = kotlinDF.toKranglDF()
+//
+//        kranglDF.toKotlinDF() shouldBe irisData
+//    }
 
     @Test
     fun `it should convert lists of objects into data-frame`() {

@@ -2,10 +2,7 @@
 
 package org.jetbrains.kotlinx.dataframe.api.util
 
-import com.github.holgerbrandl.kdfutils.toKotlinDF
-import com.github.holgerbrandl.kdfutils.toKranglDF
-import krangl.unfold
-import krangl.util.detectPropertiesByReflection
+import com.github.holgerbrandl.kdfutils.internal.detectPropertiesByReflection
 import org.jetbrains.kotlinx.dataframe.DataFrame
 import org.jetbrains.kotlinx.dataframe.api.*
 import org.jetbrains.kotlinx.dataframe.columns.toColumnSet
@@ -18,8 +15,8 @@ inline fun  <reified T> DataFrame<*>.unfoldByProperty(
     properties: List<KCallable<*>>,
     keep: Boolean = true,
     addPrefix: Boolean = false,
-) = toKranglDF().unfold(columnName, properties, keep, addPrefix)
-    .toKotlinDF()
+) = unfold<T>(columnName, properties.map{it.name}, keep, addPrefix)
+
 //
 //
 //inline fun <reified T> org.jetbrains.kotlinx.dataframe.DataFrame<*>.unfold2(

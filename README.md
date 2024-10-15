@@ -7,7 +7,7 @@
 
 > Misc utilities for kotlin-dataframe
 
-An opinionated set of utilities that we loved in [krangl](https://github.com/holgerbrandl/krangl) are yet/initially/bydesign missing in [kotlin-dataframe](https://github.com/Kotlin/dataframe)
+An opinionated set of utilities that we loved in [krangl](https://github.com/holgerbrandl/krangl) are yet/initially/by-design missing in [kotlin-dataframe](https://github.com/Kotlin/dataframe)
 
 
 ### Example datasets 
@@ -54,25 +54,17 @@ personsDF.unfold<City>("address", properties= listOf(City::name), keep = true, a
 
 There are many ways to name columns. To ease the transition (between camel, snake, ..) and to create names complying with compiler conventions, this library provides some renaming utilities
 
-### Data Frame Schema
-
-While waiting for a fix of https://github.com/Kotlin/dataframe/issues/344 we can use kdfutils to 
-```
-df.printDataClassSchema("Record")
-// .. which will print a data class schema to stdout
-// data class Record(val foo:String?, val bar:Int?) 
-```
 Typically, this works best by first renaming columns to camel case
 
 
 ## Gradle
 
-To get started simply add it as a dependency:
+To get started, simply add it as a dependency:
 ```
 dependencies {
-    implementation "com.github.holgerbrandl:kdfutils:1.3.6"
+    implementation "com.github.holgerbrandl:kdfutils:1.4.0"
 }
 ```
-Note that kdfutils does not add krangl via `api`. So the user will need to add krangl dependency manually as needed.
+Note that kdfutils does not depend on `krangl` any longer
 
 Builds are hosted on [maven-central](https://search.maven.org/search?q=a:kdfutils) supported by the great folks at [sonatype](https://www.sonatype.com/).

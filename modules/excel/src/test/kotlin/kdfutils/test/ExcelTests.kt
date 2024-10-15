@@ -245,7 +245,7 @@ class ExcelTests {
 //            df.schema()
 //
 //            (df.cols[2] is IntCol) shouldBe true
-//            (df.cols[3] is DoubleCol) shouldBe true
+//            (df.cols[3].isType<Double>()) shouldBe true
 //        }
 //
 //        LocaleUtil.setUserLocale(defaultLocale)

@@ -37,10 +37,11 @@ publishing {
     publications {
         create<MavenPublication>("maven") {
             from(components["java"])
+            artifactId = "kdfutils-excel"
 
             pom {
                 url.set("https://github.com/holgerbrandl/kdfutils")
-                name.set("kdfutils")
+                name.set("kdfutils-excel")
                 description.set("Misc utilities for kotlin-dataframe")
 
                 scm {

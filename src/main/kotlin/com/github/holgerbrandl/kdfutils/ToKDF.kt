@@ -9,7 +9,7 @@ package com.github.holgerbrandl.kdfutils
 //fun DataFrame.toKotlinDF(): AnyFrame {
 //    val kdfCols = cols.map {
 //        when(it) {
-//            is DoubleCol -> columnOf(*it.values)
+//           .isType<Double>() -> columnOf(*it.values)
 //            is IntCol -> columnOf(*it.values)
 //            is StringCol -> columnOf(*it.values)
 //            is BooleanCol -> columnOf(*it.values)

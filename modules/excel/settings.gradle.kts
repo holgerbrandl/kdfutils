@@ -1,1 +1,1 @@
-rootProject.name = "kdfutils-exel"
+rootProject.name = "kdfutils-excel"

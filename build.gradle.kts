@@ -14,7 +14,7 @@ repositories {
 
 
 dependencies {
-    implementation("org.jetbrains.kotlinx:dataframe-core:0.14.1")
+    api("org.jetbrains.kotlinx:dataframe-core:0.14.1")
 
     testImplementation(kotlin("test"))
     testImplementation(kotlin("script-runtime"))

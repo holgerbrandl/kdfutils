@@ -20,7 +20,7 @@ cd $KDFUTILS_HOME || exit 1
 
 
 trim() { while read -r line; do echo "$line"; done; }
-kdfutils_version='v'$(grep '^version' ${KDFUTILS_HOME}/build.gradle | cut -f2 -d' ' | tr -d "'" | trim)
+kdfutils_version='v'$(grep '^version' ${KDFUTILS_HOME}/build.gradle.kts | cut -f3 -d' ' | tr -d '"' | trim)
 
 echo "new version is $kdfutils_version"
 

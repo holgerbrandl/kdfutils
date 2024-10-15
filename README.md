@@ -1,7 +1,7 @@
 # kdfutils
 
 
-[ ![Download](https://img.shields.io/badge/Maven%20Central-1.4.0-orange) ](https://mvnrepository.com/artifact/com.github.holgerbrandl/kdutils)  [![Build Status](https://github.com/holgerbrandl/kdutils/workflows/build/badge.svg)](https://github.com/holgerbrandl/kdutils/actions?query=workflow%3Abuild) [![Gitter](https://badges.gitter.im/holgerbrandl/kdutils.svg)](https://gitter.im/holgerbrandl/kdutils?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[ ![Download](https://img.shields.io/badge/Maven%20Central-1.4.3-orange) ](https://mvnrepository.com/artifact/com.github.holgerbrandl/kdutils)  [![Build Status](https://github.com/holgerbrandl/kdutils/workflows/build/badge.svg)](https://github.com/holgerbrandl/kdutils/actions?query=workflow%3Abuild) [![Gitter](https://badges.gitter.im/holgerbrandl/kdutils.svg)](https://gitter.im/holgerbrandl/kdutils?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 
 
@@ -62,7 +62,7 @@ Typically, this works best by first renaming columns to camel case
 To get started, simply add it as a dependency:
 ```
 dependencies {
-    implementation "com.github.holgerbrandl:kdfutils:1.4.0"
+    implementation "com.github.holgerbrandl:kdfutils:1.4.3"
 }
 ```
 Note that kdfutils does not depend on `krangl` any longer

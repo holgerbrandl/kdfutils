@@ -28,6 +28,11 @@ tasks.test {
 }
 
 
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
 kotlin {
     jvmToolchain(11)
 }

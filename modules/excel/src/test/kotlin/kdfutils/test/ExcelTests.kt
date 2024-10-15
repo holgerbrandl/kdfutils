@@ -106,9 +106,10 @@ class ExcelTests {
             "FirstSheet", colTypes = NamedColumnSpec("Activities" to ColType.Int)
         )
 
-        (df["Activities"].isType<Int>()) shouldBe true // Tests when ColType is given
+        (df["Activities"].isType<Int?>()) shouldBe true // Tests when ColType is given
         (df["Registered"].isType<Boolean>()) shouldBe true // Tests when ColType is guessed
     }
+
 
     @Test
     fun `readExcel - shrt colTypes should work`() {

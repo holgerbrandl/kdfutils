@@ -1,9 +1,12 @@
 package kdfutils
 
 import io.kotest.matchers.shouldBe
+import org.jetbrains.kotlinx.dataframe.DataFrame
+import org.jetbrains.kotlinx.dataframe.api.dataFrameOf
 import org.jetbrains.kotlinx.dataframe.api.print
 import org.jetbrains.kotlinx.dataframe.api.toDataFrame
-import org.jetbrains.kotlinx.dataframe.api.util.unfold
+import org.jetbrains.kotlinx.dataframe.api.util.unfoldPropertiesOf
+import org.jetbrains.kotlinx.dataframe.api.util.unfoldPropertiesByRefOf
 import org.junit.jupiter.api.Test
 
 class UnfoldTests {
@@ -19,7 +22,7 @@ class UnfoldTests {
 
     @Test
     fun `it should unwrap columns`() {
-        val dfUnfold = personsDF.unfold<City>(
+        val dfUnfold = personsDF.unfoldPropertiesOf<City>(
             "address",
 //            keep = true,
             properties = listOf("name"),
@@ -35,7 +38,7 @@ class UnfoldTests {
 
     @Test
     fun `it should unwarp columns without prefix`() {
-        val dfUnfold = personsDF.unfold<City>(
+        val dfUnfold = personsDF.unfoldPropertiesOf<City>(
             "address",
             keep = true,
             addPrefix = true
@@ -82,4 +85,32 @@ class UnfoldTests {
 //
 //        unwrapped["variant"][1] shouldBe 2
 //    }
+//
+
+
+
+    @Test
+    fun `it should only detect properties and not functions via reflection`() {
+        data class Car(val type: String, val model: String){
+            fun isAutomatic() = true
+        }
+
+        val cars: DataFrame<*> = dataFrameOf("owner", "car")(
+            "Max", Car("audi", "a8"),
+            "Tom", Car("toyota", "corolla")
+        )
+//        val unwrappedCore = cars.unfoldPropertiesOf<Car>("car")
+
+//        cars.unfold<Car>()
+
+
+        val unwrapped = cars.unfoldPropertiesOf<Car>(
+            "car",
+            properties = listOf("model"),
+            keep = true,
+            addPrefix = true
+        )
+
+        unwrapped.columnNames() shouldBe listOf("owner", "car", "car_model")
+    }
 }

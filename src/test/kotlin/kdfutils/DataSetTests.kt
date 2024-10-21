@@ -18,7 +18,7 @@ class DataSetTests{
         }
 
         sleepPatterns.apply {
-            size shouldBe 11
+            size shouldBe 83
         }
     }
 }

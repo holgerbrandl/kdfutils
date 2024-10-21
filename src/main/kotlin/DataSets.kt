@@ -4,7 +4,9 @@ package org.jetbrains.kotlinx.dataframe.datasets
 
 import org.jetbrains.kotlinx.dataframe.DataFrame
 import org.jetbrains.kotlinx.dataframe.api.ParserOptions
+import org.jetbrains.kotlinx.dataframe.api.convert
 import org.jetbrains.kotlinx.dataframe.api.map
+import org.jetbrains.kotlinx.dataframe.api.with
 import org.jetbrains.kotlinx.dataframe.io.*
 import java.io.File
 import java.io.FileInputStream
@@ -32,13 +34,22 @@ Additional variables order, conservation status and vore were added from wikiped
 val sleepData by lazy {
     val reader = DataFrame::class.java.getResourceAsStream("/data/msleep.csv")
 
+//    DataFrame.readDelim(
+//        reader
+//        FileInputStream(File("src/main/resources/data/msleep.csv")),
+//        csvType = CSVType.DEFAULT,
+//        colTypes = mapOf("brainwt" to ColType.Double),
+//        parserOptions = ParserOptions(nullStrings = setOf("NA"))
+//    )
+
+    // todo remove workaround for https://github.com/Kotlin/dataframe/issues/921
     DataFrame.readDelim(
-//        reader!!,
-        FileInputStream(File("src/main/resources/data/msleep.csv")),
+//        FileInputStream(File("src/main/resources/data/msleep.csv")),
+        reader!!,
         csvType = CSVType.DEFAULT,
-        colTypes = mapOf("brainwt" to ColType.Double),
+        colTypes = mapOf("brainwt" to ColType.String),
         parserOptions = ParserOptions(nullStrings = setOf("NA"))
-    )
+    ).convert { "brainwt"<String>() }.with { it.toDoubleOrNull() }
 }
 
 

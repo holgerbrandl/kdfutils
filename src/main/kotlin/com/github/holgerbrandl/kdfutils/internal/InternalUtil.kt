@@ -6,7 +6,14 @@ import kotlin.reflect.full.starProjectedType
 
 
 //todo move to internal namespace to prevent API clutter
-inline fun <reified T> detectPropertiesByReflection(): List<KCallable<*>> {
+inline fun <reified T> detectPropertiesByReflection(): List<KProperty<*>> {
+    val members = T::class.members
+
+    return members.filterIsInstance<KProperty<*>>()
+}
+
+//todo move to internal namespace to prevent API clutter
+private inline fun <reified T> detectCallablesByReflection(): List<KCallable<*>> {
     val members = T::class.members
 
     val propsOrGetters = members.filter {

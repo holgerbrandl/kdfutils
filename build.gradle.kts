@@ -34,7 +34,7 @@ tasks.test {
 
 //http://stackoverflow.com/questions/34377367/why-is-gradle-install-replacing-my-version-with-unspecified
 group = "com.github.holgerbrandl"
-version = "1.4.3"
+version = "1.4.4"
 
 
 java {

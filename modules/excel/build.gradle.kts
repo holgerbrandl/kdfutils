@@ -17,7 +17,7 @@ repositories {
 dependencies {
     api(project(":"))
 
-    api( "org.jetbrains.kotlinx:dataframe-excel:0.14.1")
+    api( "org.jetbrains.kotlinx:dataframe-excel:0.14.2")
 
     testImplementation(kotlin("test"))
     testImplementation("io.kotest:kotest-assertions-core:5.4.2")
@@ -34,7 +34,7 @@ java {
 }
 
 kotlin {
-    jvmToolchain(11)
+    jvmToolchain(17)
 }
 
 

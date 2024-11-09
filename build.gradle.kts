@@ -14,7 +14,7 @@ repositories {
 
 
 dependencies {
-    api("org.jetbrains.kotlinx:dataframe-core:0.14.1")
+    api("org.jetbrains.kotlinx:dataframe-core:0.14.2")
 
     testImplementation(kotlin("test"))
     testImplementation(kotlin("script-runtime"))
@@ -34,7 +34,7 @@ tasks.test {
 
 //http://stackoverflow.com/questions/34377367/why-is-gradle-install-replacing-my-version-with-unspecified
 group = "com.github.holgerbrandl"
-version = "1.4.4"
+version = "1.4.5"
 
 
 java {
@@ -44,7 +44,7 @@ java {
 
 
 kotlin {
-    jvmToolchain(11)
+    jvmToolchain(17)
 }
 
 

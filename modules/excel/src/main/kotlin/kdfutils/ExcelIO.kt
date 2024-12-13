@@ -1,5 +1,7 @@
 package com.github.holgerbrandl.kdfutils
 
+import kotlinx.datetime.Instant
+import kotlinx.datetime.LocalDate
 import org.apache.poi.ss.usermodel.*
 import org.apache.poi.ss.util.CellRangeAddress
 import org.jetbrains.kotlinx.dataframe.DataFrame
@@ -7,6 +9,8 @@ import org.jetbrains.kotlinx.dataframe.api.*
 import org.jetbrains.kotlinx.dataframe.io.ColType
 import org.jetbrains.kotlinx.dataframe.io.readExcel
 import java.io.*
+import java.net.URL
+import kotlin.time.Duration
 
 
 sealed class ColumnTypeSpec {
@@ -66,6 +70,13 @@ class CompactColumnSpec(val columnSpec: String) : ColumnTypeSpec() {
             'D' -> ColType.LocalDate
             'T' -> ColType.LocalDateTime
             't' -> ColType.LocalTime
+            'B' -> ColType.BigInteger
+            'I' -> ColType.Instant
+            'N' -> ColType.Duration
+            'U' -> ColType.Url
+            'J' -> ColType.JsonArray
+            'j' -> ColType.JsonObject
+            'c' -> ColType.Char
             '?' -> null
 //            '_' -> - = skip
             else -> throw IllegalArgumentException("invalid type '$it' in compact column spec '$columnSpec'")
@@ -129,6 +140,13 @@ fun DataFrame.Companion.readExcel(
                 ColType.LocalDate -> toLocalDate()
                 ColType.LocalTime -> toLocalTime()
                 ColType.LocalDateTime -> toLocalDateTime()
+                ColType.BigInteger -> toBigInteger()
+                ColType.Instant -> to<Instant>()
+                ColType.Duration -> to { it.convertTo<Duration>() }
+                ColType.Url -> to<URL>()
+                ColType.JsonArray -> toStr()
+                ColType.JsonObject -> toStr()
+                ColType.Char -> toStr()
                 null -> to { it }
             }
         }
